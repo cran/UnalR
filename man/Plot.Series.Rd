@@ -109,7 +109,7 @@ Los valores por defecto la ubican verticalmente a la derecha del plot.
 Algunos valores aceptados para \code{legend.position} son \code{"none"}, \code{"left"},
 \code{"top"}, \code{"right"}, \code{"bottom"} y \code{c(CoordX, CoordY)}. Para \code{legend.direction}
 solo se acepta \code{"vertical"} u \code{"horizontal"}.
-\item \code{gg.Linea}: Una lista de parámetros admitidos por la función \link[ggplot2:geom_path]{geom_line()}).
+\item \code{gg.Linea}: Una lista de parámetros admitidos por la función \link[ggplot2:geom_line]{geom_line()}).
 \item \code{gg.Punto}: Una lista de parámetros admitidos por la función \link[ggplot2:geom_point]{geom_point()})
 \item \code{gg.Texto}: Una lista cuyos valores admitidos y usados son \code{subtitle},
 \code{caption} y \code{tag}.
@@ -349,10 +349,10 @@ fig1 <- Plot.Series(
 )
 # A continuación, se detalla el caso en el que quiera adicionar un logo a 'fig1'
 # library("ggplot2"); library("magick"); require("cowplot")
-URL <- "https://upload.wikimedia.org/wikipedia/commons/1/1e/UNAL_Logosimbolo.svg"
-LogoUN <- magick::image_read_svg(URL)
+# URL    <- "https://upload.wikimedia.org/wikipedia/commons/1/1e/UNAL_Logosimbolo.svg"
+# LogoUN <- magick::image_read_svg(URL)
 ggdraw() +
-  draw_image(LogoUN, scale = 0.15, x = 0.15, hjust = 1, halign = 1, valign = 0) +
+  # draw_image(LogoUN, scale = 0.15, x = 0.15, hjust = 1, halign = 1, valign = 0) +
   draw_plot(fig1 + theme(legend.background = element_blank(),
                          panel.background = element_blank(),
                          plot.background = element_blank()

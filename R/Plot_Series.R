@@ -311,10 +311,10 @@
 #' )
 #' # A continuación, se detalla el caso en el que quiera adicionar un logo a 'fig1'
 #' # library("ggplot2"); library("magick"); require("cowplot")
-#' URL <- "https://upload.wikimedia.org/wikipedia/commons/1/1e/UNAL_Logosimbolo.svg"
-#' LogoUN <- magick::image_read_svg(URL)
+#' # URL    <- "https://upload.wikimedia.org/wikipedia/commons/1/1e/UNAL_Logosimbolo.svg"
+#' # LogoUN <- magick::image_read_svg(URL)
 #' ggdraw() +
-#'   draw_image(LogoUN, scale = 0.15, x = 0.15, hjust = 1, halign = 1, valign = 0) +
+#'   # draw_image(LogoUN, scale = 0.15, x = 0.15, hjust = 1, halign = 1, valign = 0) +
 #'   draw_plot(fig1 + theme(legend.background = element_blank(),
 #'                          panel.background = element_blank(),
 #'                          plot.background = element_blank()
@@ -364,6 +364,7 @@
 #' @importFrom forcats as_factor fct_relevel
 #' @importFrom methods missingArg
 #' @importFrom grDevices rainbow
+#' @importFrom tidyselect all_of
 Plot.Series <- function(
     datos, tiempo, valores, categoria, freqRelativa = FALSE, invertir = FALSE,
     ylim, colores, titulo = "", labelX = "Periodo", labelY = "",
@@ -446,7 +447,7 @@ Plot.Series <- function(
   } else {
     Relativo <- tableHoriz |> select(!Fecha) |> PocentRelativo() |>
       as_tibble() |> mutate(Fecha = tableHoriz$Fecha) |>
-      pivot_longer(cols = categorias, names_to = quo_name(enquo(categoria)), values_to = "Relativo")
+      pivot_longer(cols = all_of(categorias), names_to = quo_name(enquo(categoria)), values_to = "Relativo")
   }
   TablaFinal <- DataFrame |> inner_join(Relativo, by = join_by(Fecha, {{categoria}}))
   TablaFinal <- TablaFinal |> rename(Clase := {{categoria}}, Total := {{valores}})
